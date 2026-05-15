@@ -1,0 +1,9 @@
+/vendor/
+/templates_c/*.php
+/cache/
+/assets/questionari/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

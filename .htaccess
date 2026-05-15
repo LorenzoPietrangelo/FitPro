@@ -1,0 +1,11 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Blocca accesso diretto a configs/ e uploads/
+RewriteRule ^(configs|uploads)/  - [F,L]
+
+# Tutto ciò che non è un file fisico → index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
