@@ -8,8 +8,8 @@ RUN docker-php-ext-install pdo pdo_mysql
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# Abilita mod_rewrite per il router
-RUN a2enmod rewrite
+# Abilita mod_rewrite, forza MPM prefork (richiesto da mod_php)
+RUN a2dismod mpm_event mpm_worker 2>/dev/null || true && a2enmod mpm_prefork rewrite
 
 # Permetti override in .htaccess
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
