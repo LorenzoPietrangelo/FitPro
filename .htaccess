@@ -2,10 +2,13 @@ Options -Indexes
 
 RewriteEngine On
 
-# Blocca accesso diretto a configs/ e uploads/
-RewriteRule ^(configs|uploads)/  - [F,L]
+# ── Protezione cartelle non pubbliche ────────────────────────────────────────
+RewriteRule ^(configs|vendor|templates|templates_c|cache|uploads)/  - [F,L]
 
-# Tutto ciò che non è un file fisico → index.php
+# ── Protezione file sensibili nella root ─────────────────────────────────────
+RewriteRule ^(composer\.(json|lock)|\.env.*|.*\.sql|.*\.log)$  - [F,L]
+
+# ── Router: tutto ciò che non è un file/dir fisico → index.php ───────────────
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]

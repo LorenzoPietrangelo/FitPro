@@ -1,0 +1,6 @@
+templates_c/
+cache/
+vendor/
+.git/
+*.zip
+*.log

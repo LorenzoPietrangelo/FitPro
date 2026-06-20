@@ -34,7 +34,7 @@ function dbGetPrograms(): array
          WHERE NOT EXISTS (
              SELECT 1 FROM categoria_prodotto c
              WHERE c.id_prodotto = p.id_prodotto
-               AND c.categoria IN ('coaching','custom')
+               AND c.categoria = 'custom'
          )
          GROUP BY p.id_prodotto, p.titolo, p.descrizione,
                   p.prezzo, p.immagine_path, p.file_path,
@@ -260,7 +260,7 @@ function dbIsPremiumProduct(int $productId): bool
     $row = dbFetchOne(
         "SELECT 1 FROM categoria_prodotto
          WHERE id_prodotto = :id
-           AND categoria IN ('coaching','custom')
+           AND categoria = 'custom'
          LIMIT 1",
         [':id' => $productId]
     );

@@ -4,11 +4,15 @@
 
 declare(strict_types=1);
 
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_PORT', getenv('DB_PORT') ?: '3306');
-define('DB_NAME', getenv('DB_NAME') ?: 'fitpro');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
+// ── Credenziali DB ───────────────────────────────────────────────────────────
+// In produzione su InfinityFree sostituisci i valori qui sotto con quelli
+// forniti dal pannello di controllo (MySQL Databases).
+// In sviluppo locale puoi usare variabili d'ambiente per non toccare questo file.
+define('DB_HOST', getenv('DB_HOST') ?: getenv('MYSQLHOST') ?: '127.0.0.1');
+define('DB_PORT', getenv('DB_PORT') ?: getenv('MYSQLPORT') ?: '3306');
+define('DB_NAME', getenv('DB_NAME') ?: getenv('MYSQLDATABASE') ?: 'fitpro');
+define('DB_USER', getenv('DB_USER') ?: getenv('MYSQLUSER') ?: 'fituser');
+define('DB_PASS', getenv('DB_PASS') ?: getenv('MYSQLPASSWORD') ?: '');
 
 function db(): PDO
 {

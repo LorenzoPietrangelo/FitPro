@@ -287,7 +287,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'save-service') {
         $category = $_GET['category'] ?? '';
-        if (!in_array($category, ['coaching', 'custom'], true)) {
+        if ($category !== 'custom') {
             redirect('/admin-content');
         }
 
@@ -356,17 +356,6 @@ if (isset($_GET['modal'])) {
             ];
             break;
 
-        case 'coaching':
-            $existingData = dbGetServiceByCategory('coaching');
-            $modal = [
-                'type'      => 'coaching',
-                'title'     => 'Modifica Coaching',
-                'action'    => BASE_URL . '/admin-content?action=save-service&category=coaching',
-                'target_id' => $existingData['id'] ?? null,
-                'data'      => $existingData ?? [],
-            ];
-            break;
-
         case 'custom':
             $existingData = dbGetServiceByCategory('custom');
             $modal = [
@@ -386,7 +375,6 @@ unset($_SESSION['flash_error'], $_SESSION['flash_success']);
 
 render('admin_content.tpl', 'Gestione Contenuti – FitStore Admin', [
     'programs'                     => dbGetPrograms(),
-    'coaching'                     => dbGetServiceByCategory('coaching'),
     'custom'                       => dbGetServiceByCategory('custom'),
     'transformations'              => dbGetTransformations(),
     'coupons'                      => dbGetCoupons(),
@@ -402,7 +390,6 @@ render('admin_content.tpl', 'Gestione Contenuti – FitStore Admin', [
     'edit_transformation_action'   => BASE_URL . '/admin-content?action=save-transformation',
     'delete_transformation_action' => BASE_URL . '/admin-content?action=delete-transformation',
 
-    'edit_coaching_action'         => BASE_URL . '/admin-content?modal=coaching',
     'edit_custom_action'           => BASE_URL . '/admin-content?modal=custom',
 
     'add_coupon_action'            => BASE_URL . '/admin-content?modal=coupon',

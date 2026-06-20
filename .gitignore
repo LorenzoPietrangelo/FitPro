@@ -1,7 +1,8 @@
 /vendor/
-/templates_c/*.php
+/templates_c/
 /cache/
 /assets/questionari/
+.env
 .DS_Store
 Thumbs.db
 .idea/

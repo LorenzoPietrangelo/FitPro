@@ -1,0 +1,37 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-fitpro}
+      DB_USER: ${DB_USER:-fituser}
+      DB_PASS: ${DB_PASS:-fitpass}
+    volumes:
+      - ./assets:/var/www/html/assets
+      - ./templates_c:/var/www/html/templates_c
+      - ./cache:/var/www/html/cache
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-fitpro}
+      MYSQL_USER: ${DB_USER:-fituser}
+      MYSQL_PASSWORD: ${DB_PASS:-fitpass}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS:-rootpass}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./fitpro.sql:/docker-entrypoint-initdb.d/fitpro.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:

@@ -48,10 +48,14 @@
                             </div>
                             <div class="text-right">
                                 <p class="font-bold text-lg text-slate-900">€{$item.price}</p>
-                                          <a href="{url route='cart-remove' product_id=$item.id}"
-                                   class="text-red-500 text-sm hover:underline mt-1 font-medium flex items-center justify-end gap-1">
-                                    <i data-lucide="trash-2" class="w-3 h-3"></i> Rimuovi
-                                </a>
+                                <form method="POST" action="{url route='cart-remove'}" class="inline">
+                                    <input type="hidden" name="csrf_token" value="{$csrf_token|escape}" />
+                                    <input type="hidden" name="product_id" value="{$item.id}" />
+                                    <button type="submit"
+                                            class="text-red-500 text-sm hover:underline mt-1 font-medium flex items-center justify-end gap-1">
+                                        <i data-lucide="trash-2" class="w-3 h-3"></i> Rimuovi
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     {/foreach}

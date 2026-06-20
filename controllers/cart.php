@@ -68,11 +68,7 @@ if ($action === 'checkout' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('/cart');
     }
 
-    $productIds = array_map(fn($ci) => (int) ($ci['id'] ?? 0), $cart);
     $orderId = dbCheckoutCart((int) $user['id']);
-    dbSaveUserPurchases((int) $user['id'], $productIds);
-    dbCreatePendingRequestsForProducts((int) $user['id'], $productIds);
-    dbAssignGroupsForPurchasedProducts((int) $user['id'], $productIds);
     dbRefreshUserSessionGroups((int) $user['id']);
     $_SESSION['user']['purchased'] = dbGetUserPurchasedIds((int) $user['id']);
     redirect('/purchased?success=1');

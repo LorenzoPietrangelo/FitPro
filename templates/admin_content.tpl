@@ -1,22 +1,21 @@
 {*
  * admin_content.tpl
- * Schermata Admin: Gestione Contenuti (schede, coaching, custom, trasformazioni).
+ * Schermata Admin: Gestione Contenuti (schede, custom, trasformazioni, coupon).
  *
  * Variabili attese:
  *   $user              - oggetto admin loggato
  *   $programs          - array schede: id, title, desc, price, img
- *   $coaching          - oggetto coaching: title, desc, price
  *   $custom            - oggetto custom: title, desc, price
  *   $transformations   - array trasformazioni: id, name, result, quote, img
  *   $coupons           - array coupon: id, name, discount, expires_at
  *   $modal             - oggetto modale aperta (null se chiusa):
- *                        type ('program'|'coaching'|'custom'|'transformation'),
+ *                        type ('program'|'custom'|'transformation'|'coupon'),
  *                        target_id (int|null),
  *                        data (dati pre-compilati per la modifica)
  *   $csrf_token        - token CSRF
  *   $add_program_action, $edit_program_action, $delete_program_action
  *   $add_transformation_action, $edit_transformation_action, $delete_transformation_action
- *   $edit_coaching_action, $edit_custom_action
+ *   $edit_custom_action
  *}
 {extends file="layout_base.tpl"}
 

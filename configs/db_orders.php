@@ -25,7 +25,7 @@ function dbGetUserPurchasedProducts(int $userId): array
          )
          AND p.id_prodotto NOT IN (
              SELECT id_prodotto FROM categoria_prodotto
-             WHERE categoria IN ('coaching','custom')
+             WHERE categoria = 'custom'
          )
          ORDER BY p.id_prodotto ASC",
         [':uid' => $userId]
@@ -56,6 +56,8 @@ function dbCheckoutCart(int $userId): int
         return 0;
     }
 
+    $productIds = array_values(array_filter(array_map(fn($i) => (int) ($i['id'] ?? 0), $cart)));
+
     $subtotal = array_sum(array_column($cart, 'price'));
     $coupon   = dbGetCartCoupon();
     $discount = 0.0;
@@ -83,8 +85,15 @@ function dbCheckoutCart(int $userId): int
             );
         }
 
-        dbClearCart();
+        dbSaveUserPurchases($userId, $productIds);
+        dbCreatePendingRequestsForProducts($userId, $productIds);
+        dbAssignGroupsForPurchasedProducts($userId, $productIds);
+
         $pdo->commit();
+
+        // Pulisce il carrello solo dopo che la transazione è confermata
+        dbClearCart();
+
         return $orderId;
     } catch (Throwable $e) {
         $pdo->rollBack();

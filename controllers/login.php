@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$isRegisterMode) {
     } else {
         if ((time() - $lastTime) >= 600) {
             $attempts = 0;
+            $lastTime = 0;
         }
 
         $userRow = dbGetUserByCredentials($email, $password);

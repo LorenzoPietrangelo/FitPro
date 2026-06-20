@@ -24,9 +24,6 @@
                     Registrati per iniziare il tuo percorso.
                 {/if}
             </p>
-            <p class="mt-2 text-center text-xs text-amber-600 font-medium">
-                (Tip: usa admin@admin.com per i poteri di amministratore)
-            </p>
         </div>
 
         {if isset($error_message) && $error_message}

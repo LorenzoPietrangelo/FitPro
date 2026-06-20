@@ -155,7 +155,7 @@ function dbAssignGroupsForPurchasedProducts(int $userId, array $productIds): arr
          FROM categoria_prodotto cp
          INNER JOIN services s ON s.username = cp.categoria
          WHERE cp.id_prodotto IN ($placeholders)
-           AND cp.categoria IN ('custom', 'coaching')",
+           AND cp.categoria = 'custom'",
         array_values($productIds)
     );
 

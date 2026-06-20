@@ -266,7 +266,6 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`username`, `descrizione`) VALUES
-('coaching', 'Coaching continuativo personalizzato'),
 ('custom', 'Protocolli di allenamento personalizzati su misura');
 
 -- --------------------------------------------------------
@@ -285,7 +284,6 @@ CREATE TABLE `services_has_groups` (
 --
 
 INSERT INTO `services_has_groups` (`username`, `id_group`) VALUES
-('coaching', 2),
 ('custom', 2);
 
 -- --------------------------------------------------------

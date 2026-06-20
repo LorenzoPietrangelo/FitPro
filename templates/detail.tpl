@@ -1,11 +1,11 @@
 {*
  * detail.tpl
- * Schermata: dettaglio singolo prodotto (scheda, coaching o personalizzata).
+ * Schermata: dettaglio singolo prodotto (scheda standard o personalizzata).
  *
  * Variabili attese:
  *   $item       - oggetto prodotto: id, title, desc, price, img
  *                 opzionali: rating, reviews (solo per schede standard)
- *   $type       - stringa: 'program' | 'coaching' | 'custom'
+ *   $type       - stringa: 'program' | 'custom'
  *   $user       - oggetto utente corrente (null se ospite)
  *   $back_route - route per il pulsante "Indietro" (es. 'all-programs' o 'home')
  *}
