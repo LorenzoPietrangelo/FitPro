@@ -1,7 +1,12 @@
 FROM php:8.2-apache
 
+# Dipendenze di sistema (unzip serve a Composer)
+RUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
+
 # Estensioni PHP necessarie
 RUN docker-php-ext-install pdo pdo_mysql
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Abilita mod_rewrite per il router
 RUN a2enmod rewrite
