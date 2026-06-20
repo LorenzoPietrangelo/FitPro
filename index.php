@@ -1,6 +1,8 @@
 <?php
-
 declare(strict_types=1);
+
+ini_set('display_errors', '0');
+error_reporting(E_ALL);
 
 $docRoot  = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']), '/');
 $projPath = rtrim(str_replace('\\', '/', __DIR__), '/');

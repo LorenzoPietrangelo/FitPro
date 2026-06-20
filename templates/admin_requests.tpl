@@ -78,7 +78,7 @@
                                         <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-inner">
 
                                             {* Se il questionario non è stato ancora compilato mostra avviso *}
-                                            {assign var="has_answers" value=($req.answers.nome|default:'')|trim neq ''}
+                                            {assign var="has_answers" value=($req.answers.nome|default:'') neq ''}
 
                                             <h4 class="font-bold text-slate-900 mb-4 border-b pb-4 flex items-start justify-between gap-4">
                                                 <span>

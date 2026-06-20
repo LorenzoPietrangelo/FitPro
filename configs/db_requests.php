@@ -279,6 +279,15 @@ function dbSaveTransformation(array $data, ?int $id = null): int
 
 function dbDeleteTransformation(int $id): void
 {
+    $row = dbFetchOne(
+        'SELECT foto FROM testimonianze WHERE id_testimonianza = :id',
+        [':id' => $id]
+    );
+
+    if ($row) {
+        dbDeleteAssetFile($row['foto'] ?? null);
+    }
+
     dbExecute('DELETE FROM testimonianze WHERE id_testimonianza = :id', [':id' => $id]);
 }
 

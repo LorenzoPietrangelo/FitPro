@@ -3,7 +3,7 @@ Options -Indexes
 RewriteEngine On
 
 # ── Protezione cartelle non pubbliche ────────────────────────────────────────
-RewriteRule ^(configs|vendor|templates|templates_c|cache|uploads)/  - [F,L]
+RewriteRule ^(configs|controllers|vendor|templates|templates_c|cache|uploads)/  - [F,L]
 
 # ── Protezione file sensibili nella root ─────────────────────────────────────
 RewriteRule ^(composer\.(json|lock)|\.env.*|.*\.sql|.*\.log)$  - [F,L]
